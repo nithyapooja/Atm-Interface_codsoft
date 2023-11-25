@@ -1,0 +1,83 @@
+import java.util.Scanner;
+
+class ATM {
+    float balance=1000000;
+    String pin;
+
+    public void check() {
+        int count = 0;
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter Your Pin: ");
+        pin = s.next();
+
+        for (int i = 0; i < pin.length(); i++) {
+            count++;
+        }
+
+        if (count== 4) {
+            menu();
+        } else {
+            System.out.println("Enter a Valid Pin");
+        }
+        s.close();
+    }
+
+    public void menu() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("1. Check A/C Balance");
+        System.out.println("2. Withdraw Money");
+        System.out.println("3. Deposit Money");
+        System.out.println("4. Exit");
+        System.out.println("Enter Your Choice: ");
+
+        int opt = s.nextInt();
+        if (opt == 1) {
+            checkBalance();
+        } else if (opt == 2) {
+            withdraw();
+        } else if (opt == 3) {
+            deposit();
+        } else if (opt == 4) {
+            return;
+        } else {
+            System.out.println("Enter a Valid option to proceed");
+        }
+        s.close();
+    }
+
+    public void checkBalance() {
+        System.out.println("Balance: " + balance);
+        menu();
+    }
+
+    public void withdraw() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter amount to withdraw: ");
+        float amount = s.nextFloat();
+        if (amount > balance) {
+            System.out.println("Insufficient Balance");
+        } else {
+            balance = balance - amount;
+            System.out.println("Money Withdrawal completed successfully");
+        }
+        s.close();
+        menu();
+    }
+
+    public void deposit() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter the amount: ");
+        float amount = s.nextFloat();
+        balance = balance + amount;
+        System.out.println("Money deposited successfully");
+        s.close();
+        // menu();
+    }
+}
+
+public class ATMMACHINE {
+    public static void main(String[] args) {
+        ATM obj = new ATM();
+        obj.check();
+    }
+}
